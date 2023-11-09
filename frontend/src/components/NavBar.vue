@@ -7,7 +7,7 @@
                     <a href="#">Line Up</a>
                   </li>
                   <li>
-                    <a href="#">Info Evento</a>
+                    <a href="#">Informacion</a>
                   </li>
                   <li>
                     <a href="#">Tickets</a>

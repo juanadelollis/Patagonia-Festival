@@ -3,6 +3,9 @@ import HomePage from './components/HomePage'
 import CreatePage from './components/CreatePage'
 import FechasPage from './components/FechasPage'
 import LoginPage from './components/LoginPage'
+import InfoPage from './components/InfoPage'
+import CheckOut from './components/CheckOut'
+
 
 //Acá definimos las rutas
 const routes = [
@@ -26,7 +29,18 @@ const routes = [
         name: 'login',
         component: LoginPage
     }
-
+    ,
+    {
+        path: '/informacion', //para la login page
+        name: 'info',
+        component: InfoPage
+    },
+    {
+        path: '/checkout', //para la check page
+        name: 'checkout',
+        component: CheckOut
+    }
+    
 ]
 
 const router = createRouter({

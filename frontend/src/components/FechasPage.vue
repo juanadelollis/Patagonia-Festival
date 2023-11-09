@@ -1,9 +1,9 @@
 <template>
   <div class="container mt-5">
     <div v-for="fecha in fechas" :key="fecha.id_dia">
-        <h3>{{fecha.numero_dia}}</h3>
-        <h4>{{fecha.dia}}</h4>
-        <p>{{fecha.fecha}}</p>
+        <h3>Dia {{fecha.numero_dia}}: {{fecha.headliner}}</h3>
+        <h4>{{fecha.fecha}}</h4>
+          
     </div>
   </div>
 </template>
