@@ -30,18 +30,24 @@ export default {
     background-color: #006633;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     font-size: 1.2rem;
     color: white;
+    padding: 3%;
 }
 
 footer p {
     display: flex;
     justify-content: center;
+    background-color: #006633;
+    margin-bottom: 0;
+    padding-bottom: 2%;
+    color: white;
 }
 
 footer img{
     height: 35%;
-    width: 60%;
+    width: 20%;
 }
 
 footer li{

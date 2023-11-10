@@ -3,6 +3,9 @@ import HomePage from './components/HomePage'
 import CreatePage from './components/CreatePage'
 import FechasPage from './components/FechasPage'
 import LoginPage from './components/LoginPage'
+import InfoPage from './components/InfoPage'
+import CheckOut from './components/CheckOut'
+
 
 //Acá definimos las rutas
 const routes = [
@@ -37,6 +40,10 @@ const routes = [
         name: 'checkout',
         component: CheckOut
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 3794052cdf7d5501798accc586141db020a8463a
 ]
 
 const router = createRouter({
