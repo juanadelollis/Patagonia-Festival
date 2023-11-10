@@ -40,10 +40,7 @@ const routes = [
         name: 'checkout',
         component: CheckOut
     }
-<<<<<<< HEAD
-=======
     
->>>>>>> 3794052cdf7d5501798accc586141db020a8463a
 ]
 
 const router = createRouter({
