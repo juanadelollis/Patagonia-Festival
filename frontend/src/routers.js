@@ -26,7 +26,17 @@ const routes = [
         name: 'login',
         component: LoginPage
     }
-
+    ,
+    {
+        path: '/informacion', //para la login page
+        name: 'info',
+        component: InfoPage
+    },
+    {
+        path: '/checkout', //para la check page
+        name: 'checkout',
+        component: CheckOut
+    }
 ]
 
 const router = createRouter({
