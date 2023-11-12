@@ -1,5 +1,5 @@
 fechas =  [
-    {'idDia': 1, 'numeroDia': '1', 'fecha': '21/09/2024', 'precio':5000,'headliner': 'Taylor Swift', 'url':'../assets/images/Banner1.png',},
-    {'idDia': 1, 'numeroDia': '1', 'fecha': '22/09/2024', 'precio':5000,'headliner': 'The Weekend', 'url':'../assets/images/Banner2.png',},
-    {'idDia': 1, 'numeroDia': '1', 'fecha': '23/09/2024', 'precio':5000,'headliner': 'Miley Cyrus', 'url':'../assets/images/Banner3.png',},
+    {'idDia': 1, 'numeroDia': '1', 'fecha': '21/09/2024', 'precio':5000,'headliner': 'Taylor Swift', 'url_bannerHomePage':'https://i.imgur.com/D9XKZoR.jpg',"profile_description":"Descubre su magia , la reina del pop-country, en un recital que cautivará tu corazón con su poderosa voz y encanto inigualable.", 'url_profile_picture':"https://i.imgur.com/QPxRIOw.png"},
+    {'idDia': 2, 'numeroDia': '2', 'fecha': '22/09/2024', 'precio':5000,'headliner': 'The Weekend', 'url_bannerHomePage':'https://i.imgur.com/18rZNFj.jpg',"profile_description":"Sumérgete en un mar de éxitos, donde su increíble voz y energía te transportarán a una noche épica llena de emociones y buena música.", 'url_profile_picture':"https://i.imgur.com/bEUBG8w.png"},
+    {'idDia': 3, 'numeroDia': '3', 'fecha': '23/09/2024', 'precio':5000,'headliner': 'Miley Cyrus', 'url_bannerHomePage':'https://i.imgur.com/tlvOAtr.jpg',"profile_description":"¡Prepárate para la fiesta del año con la irreverente Miley! Disfruta de una explosión de diversión y música en un recital que te hará vibrar de principio a fin." ,'url_profile_picture':"https://i.imgur.com/padxf4b.png" },
 ]

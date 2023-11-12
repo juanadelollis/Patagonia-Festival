@@ -2,14 +2,19 @@
     <div class="checkout">
             <h1>Checkout</h1>
             <h2>Dias seleccionados</h2>
-            <a href="#"><img src="../assets/images/Patagonia_Fest_Logo_Blanco.png" alt="logo" /></a>
             <div v-for="fecha in fechas" :key="fecha.idDia">
                 <h3>Dia {{fecha.numeroDia}}: {{fecha.headliner}}</h3>
                 <h4>Fecha del Boleto: {{fecha.fecha}}</h4>
-                
             </div>
         <form class="checkout-form">
-            <input type="number" v-model="quantity">
+            <label>Número de Tarjeta</label>
+            <input type="number" placeholder="1234 5678 9101 1121">
+            <label for="">Mes de Vencimiento</label>
+            <input type="number">
+            <label for="">Año de Vencimiento</label>
+            <input type="number">
+            <label for="">Código de Seguridad</label>
+            <input type="number">
             <button type="submit" v-on:click="buy" >Comprar</button>
         </form>
     </div>
@@ -36,7 +41,7 @@ export default {
 </script>
 
 <style>
-    .*{
+    *{
         margin: 0;
         padding: 0;
     }

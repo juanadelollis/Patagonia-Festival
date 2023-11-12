@@ -4,16 +4,16 @@
       <nav class="nav-bar" id="nav">
                 <ul class="ul-nav">
                   <li>
-                    <a href="#">Line Up</a>
+                    <router-link class="link_section" to="/fechas"> Line Up </router-link>
                   </li>
                   <li>
-                    <a href="#">Informacion</a>
+                    <router-link class="link_section" to="/informacion">Informacion</router-link>
                   </li>
                   <li>
-                    <a href="#">Tickets</a>
+                    <router-link class="link_section" to="/fechas">Tickets</router-link>
                   </li> 
                   <li>
-                    <a href="#">Mi Cuenta</a>
+                    <router-link class="link_section" to="/login">Mi Cuenta</router-link>
                   </li>
                 </ul>
       </nav>
@@ -64,8 +64,8 @@ export default {
     color: white;
     text-decoration: none;
 }
-
-.a{
+  
+.link_section {
   text-decoration: none;
   color: white;
 }

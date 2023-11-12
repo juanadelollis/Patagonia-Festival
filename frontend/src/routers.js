@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from './components/HomePage'
-import CreatePage from './components/CreatePage'
 import FechasPage from './components/FechasPage'
 import LoginPage from './components/LoginPage'
 import InfoPage from './components/InfoPage'
 import CheckOut from './components/CheckOut'
-
+import ZonasPage from './components/ZonasPage'
 
 //Acá definimos las rutas
 const routes = [
@@ -15,9 +14,9 @@ const routes = [
         component:HomePage
     },
     {
-        path: '/create', //para la create page
-        name: 'create',
-        component:CreatePage
+        path: '/zonas', //para la create page
+        name: 'zonas',
+        component:ZonasPage
     },
     {
         path: '/fechas', //para la fechas page

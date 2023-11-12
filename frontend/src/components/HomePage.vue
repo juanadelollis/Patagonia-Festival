@@ -5,13 +5,14 @@
       <h1>Conoce nuestro Line Up</h1>
       <div class="banners">
         <div v-for="banner in fechas" :key="banner.idDia" class="banner">
-          <img v-bind:src="banner.url" :alt="banner.headliner" />
+          <img class="img_banner" v-bind:src="banner.url_bannerHomePage" :alt="banner.headliner" />
         </div>
       </div>
       <button @click="reservar">Reserva tus tickets ahora</button>
     </div>
 
     <div class="simple-component">
+        <img src="../assets/images/banner-info.png" class="banner-info"/>
       <h2>¿Quiere saber mas del evento?</h2>
       <p>
         Es la primera edicion del mejor festival de primavera para estudiantes
@@ -36,6 +37,11 @@ export default {
   data() {
     return {
       fechas: [],
+      artist_image:{
+        'Taylor Swift':'../assets/images/Banner1.png',
+        'The Weekend':'../assets/images/Banner2.png',
+        'Miley Cirus':'../assets/images/Banner3.png',  
+          }
     };
   },
   props: {
@@ -117,4 +123,15 @@ button:hover {
   flex: 1;
   margin: 0 10px;
 }
+
+.banner-info{
+    width: 100%;
+}
+
+.img_banner{
+  width:100%;
+  height:100%;
+}
+
+
 </style>
