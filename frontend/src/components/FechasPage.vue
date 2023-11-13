@@ -16,7 +16,8 @@
                   required
                   v-bind:name="fecha.headliner"
                   v-model="fecha.cantidadEntradas"
-                />
+                  class="input-number"
+                  />
                 <span v-if="!esCantidadValida(fecha.cantidadEntradas)"
                   >Ingrese una cantidad válida</span
                 >
@@ -132,7 +133,7 @@ h1 {
   text-decoration: none;
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 99.9vw;
   height: 60px;
   margin-top: 10px;
   font-size: 30px;
@@ -142,4 +143,15 @@ h1 {
   border: none;
   cursor: pointer;
 }
+
+.input-number{
+  width: 60px
+}
+
+span{
+  margin-left: 20px;
+  color:red;
+  font-weight: 700;
+}
+
 </style>

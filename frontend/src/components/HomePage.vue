@@ -2,7 +2,7 @@
   <div>
     <VideoHero />
     <div class="event-banner">
-      <h1>Conoce nuestro Line Up</h1>
+      <h1 class="title">Conoce nuestro Line Up</h1>
       <div class="banners">
         <div v-for="banner in fechas" :key="banner.idDia" class="banner">
           <img class="img_banner" v-bind:src="banner.url_bannerHomePage" :alt="banner.headliner" />
@@ -26,7 +26,7 @@
         pequeños, saborea una oferta gastronómica que abraza todos los sabores,
         y todo en un entorno de ensueño. ¡Una sinfonía de experiencias!
       </p>
-      <button @click="onButtonClick">Conoce más</button>
+      <button @click="irInformacion">Conoce más</button>
     </div>
   </div>
 </template>
@@ -64,12 +64,11 @@ export default {
           console.log(error);
         });
     },
-    onButtonClick() {
-      // Lógica que se ejecutará cuando se haga clic en el botón
+    irInformacion() {
+      this.$router.push('/informacion');
     },
     reservar() {
-      // Lógica para reservar tus tickets
-      // Puedes redirigir a una página de reserva o realizar alguna acción específica aquí
+      this.$router.push('/fechas');
     },
   },
   //este se llama una vez creado el objeto, ver lifecicle hooks
@@ -81,6 +80,10 @@ export default {
 </script>
 
 <style>
+ .title{
+  margin-top: 0px;
+}
+
 .simple-component {
   text-align: center;
   padding: 5% 13%;

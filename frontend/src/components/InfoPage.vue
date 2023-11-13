@@ -1,7 +1,9 @@
 <template>
+  <div>
+
     <div class="header">
         <h1>LA MÚSICA ESTÁ EN NUESTRO ADN</h1>
-        <h3>Lo que sucede en #LollaAR no tiene comparación:
+        <h3>Lo que sucede en Patagonia Fest no tiene comparación:
             3 días con shows de más de 100 artistas, en 5 escenarios
             con variedad y calidad para que todos disfruten.
             Diferentes expresiones artísticas, shows y actividades infantiles,
@@ -42,6 +44,7 @@
             musica para que conectes al maximo.
         </p>
     </div>
+  </div>
 
 </template>
 
