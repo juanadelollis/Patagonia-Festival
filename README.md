@@ -16,8 +16,8 @@ Patagonia Festival es una aplicación web para gestionar la venta de boletos y l
 
 - HTML.
 
--JS.
+- JS.
 
--Css.
+- Css.
 
 Creado por Andres Reinoza, Milagros Blasco y Juana De Lollis
