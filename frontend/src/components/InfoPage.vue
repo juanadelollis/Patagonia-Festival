@@ -11,7 +11,7 @@
     <div class="info">
         <h2>Patagonia Festival</h2>
         <p>Podrás disfrutar del festival Patagonia 
-        el 15, 16 y 17 de enero del 2024.
+        el 21, 22 y 23 de septiembre del 2024.
         El mismo se realizará en el Complejo Patagonia,
         ubicado en Av. Alvarez Thomas 700, Bariloche,
         Provincia de Rio Negro.</p>
@@ -105,7 +105,7 @@ export default {
 </script>
 
 <style>
-    .*{
+    *{
         padding: 0;
         margin: 0;
     }
