@@ -4,9 +4,10 @@
                 <img src="../assets/images/Patagonia_Fest_Logo_Blanco.png" alt="">
                 <div class="footer--menu--list">
                     <ul>
-                        <li>Tickets</li>
-                        <li>Line Up</li>
-                        <li>Mi Cuenta</li>
+                        <li><router-link class="link_section" to="/fechas" > Line Up </router-link></li>
+                        <li><router-link class="link_section" to="/informacion" > Informacion </router-link></li>
+                        <li><router-link class="link_section" to="/fechas" > Tickets </router-link></li>
+                        <li><router-link class="link_section" to="/login" > Inicia Sesion </router-link></li>
                     </ul>
                 </div>
             </div>
@@ -57,4 +58,9 @@ footer li{
 footer ul{
     padding: 5px;
 }
+.link_section {
+    text-decoration: none;
+    color: white;
+  }
+
 </style>

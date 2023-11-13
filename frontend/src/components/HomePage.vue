@@ -37,11 +37,6 @@ export default {
   data() {
     return {
       fechas: [],
-      artist_image:{
-        'Taylor Swift':'../assets/images/Banner1.png',
-        'The Weekend':'../assets/images/Banner2.png',
-        'Miley Cirus':'../assets/images/Banner3.png',  
-          }
     };
   },
   props: {

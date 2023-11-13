@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form>
+    <form @submit.prevent="checkForm">
       <h1>Elige el día que quieres ir</h1>
       <div class="card-section">
         <div class="card--artista">
@@ -11,16 +11,25 @@
               <div>
                 <p>{{ fecha.profile_description }}</p>
                 <label for="">Cantidad de entradas</label>
-                <br>
-                <input type="number" required v-bind:name="fecha.headliner" v-model="fecha.cantidadEntradas">
-                <span v-if="!esCantidadValida(fecha.cantidadEntradas)">Ingrese una cantidad válida</span>
+                <br />
+                <input type="number"
+                  required
+                  v-bind:name="fecha.headliner"
+                  v-model="fecha.cantidadEntradas"
+                />
+                <span v-if="!esCantidadValida(fecha.cantidadEntradas)"
+                  >Ingrese una cantidad válida</span
+                >
               </div>
-              <img v-bind:src="fecha.url_profile_picture" v-bind:alt="fecha.headliner">
+              <img
+                v-bind:src="fecha.url_profile_picture"
+                v-bind:alt="fecha.headliner"
+              />
             </div>
           </div>
         </div>
       </div>
-      <router-link class="button" to="/zonas" @click="reservar">Siguiente Etapa</router-link>
+      <button @click="handleCounterChange" class="button">Siguiente Etapa</button>
     </form>
   </section>
 </template>
@@ -33,47 +42,52 @@ export default {
     };
   },
   methods: {
-    chechForm(e) {
+    checkForm(e) {
       e.preventDefault();
-      function getFechas() {
-        fetch("http://localhost:5000/fechas", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      this.handleCounterChange();
+      this.$router.push('/zonas');
+    },
+    getFechas() {
+      fetch("http://localhost:5000/fechas", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          this.fechas = data.fechas.map((fecha) => ({
+            ...fecha,
+            cantidadEntradas: 0, 
+          }));
         })
-          .then((resp) => resp.json())
-          .then((data) => {
-            let fechas = data.fechas;
-            // let bandas = data.fechas.banda
-            console.log(fechas);
-            fechas.forEach((fecha) => {
-              this.fechas.push(fecha);
-            });
-            //this.articles.push(...data)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    esCantidadValida(cantidad) {
+      return cantidad >= 0;
+    },
+    handleCounterChange() {
+      const datosLocalStorage = { dias: {} };
 
-      function esCantidadValida(cantidad) {
-          return cantidad > 0;
-        }
-      }
+      this.fechas.forEach((fecha) => {
+        datosLocalStorage.dias[fecha.headliner] = fecha.cantidadEntradas;
+      });
 
-      function handleCounterChange({ name, value }) {
-        localStorage.setItem(name, value);
-      }
-    }
+      localStorage.setItem('datos', JSON.stringify(datosLocalStorage));
+    
+    },
   },
-  //este se llama una vez creado el objeto, ver lifecicle hooks
   created() {
     this.getFechas();
   },
 };
 </script>
 
+
 <style>
+                
 .card--artista {
   width: 40%;
 }

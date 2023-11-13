@@ -18,29 +18,25 @@ export default {
             user: {
                 name: "",
                 password: "",
-            },usuarios:[]
+            }
         }
     },
     methods: {
-    chechUser(e){
+    checkUser(e){
         e.preventDefault();
 
         fetch('http://localhost:5000/api/login',{
-          method:"POST",
-          headers:{
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(this.user)
-        })
-        .then(resp => resp.json())
-        .then(data => {
-          let usuarios = data.usuarios;
-          console.log(usuarios);
-          usuarios.forEach(usuario => {this.usuarios.push(usuario)})
-        })
+                method: "POST",
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.user)
+            }
+            ).then( response => { console.log(response)})
+        }
     }
 }
-}
+
 </script>
 
 <style>

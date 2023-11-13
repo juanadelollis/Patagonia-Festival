@@ -3,25 +3,27 @@
         <div class="card-zona">
             <h2>Elige la zona</h2>
             <img src="../assets/images/Mapa_Plateas.svg" alt="Mapa plateas" class="Mapa_Plateas">
+            <form @submit.prevent="checkForm">
 
-            <div class="card-content-zona">                
-                <input type="radio" name="concert-zona" id="Campo" value="Campo">
-                <div class="zona-description">
-                    <h3>Campo</h3>
-                    <h4>Precio $100.000</h4>
-                    <p class="description">Ofrece la mejor vista al escenario para vivir el concierto de cerca. Asegura tu entrada y sé parte de una experiencia musical inolvidable.</p>
+                <div class="card-content-zona">                
+                    <input type="radio" name="concert-zona" id="Campo" value="Campo" v-model="selectedZona">
+                    <div class="zona-description">
+                        <h3>Campo</h3>
+                        <h4>Precio $100.000</h4>
+                        <p class="description">Ofrece la mejor vista al escenario para vivir el concierto de cerca. Asegura tu entrada y sé parte de una experiencia musical inolvidable.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="card-content-zona">                
-                <input type="radio" name="concert-zona" id="Platea" value="Platea">
-                <div class="zona-description">
-                    <h3>Platea</h3>
-                    <h4>Precio $50.000</h4>
-                    <p class="description">Ofrece comodidad y una vista óptima del escenario, proporcionando una experiencia única para disfrutar del concierto con detalle y estilo. Con amplio espacio y ubicación estratégica, tu asiento en la Platea asegura una vivencia inigualable para sumergirte en la magia de la música.</p>
+                
+                <div class="card-content-zona">                
+                    <input type="radio" name="concert-zona" id="Platea" value="Platea" v-model="selectedZona">
+                    <div class="zona-description">
+                        <h3>Platea</h3>
+                        <h4>Precio $50.000</h4>
+                        <p class="description">Ofrece comodidad y una vista óptima del escenario, proporcionando una experiencia única para disfrutar del concierto con detalle y estilo. Con amplio espacio y ubicación estratégica, tu asiento en la Platea asegura una vivencia inigualable para sumergirte en la magia de la música.</p>
+                    </div>
                 </div>
-            </div>
-            <router-link class="button" to="/" @click="reservar">Siguiente Etapa</router-link>
+                <button class="button">Siguiente Etapa</button>
+            </form>
         </div>
     </main>
         
@@ -29,7 +31,26 @@
 
 <script>
 export default {
-// hacer que el boton de siguiente etapa guarde localstorage la preferencia de la zona y condicione el valor de los tickets
+data(){
+    return{
+        selectedZona:"",
+    };
+},
+methods:{
+    checkForm(e) {
+      e.preventDefault();
+
+      const datosCompra = JSON.parse(localStorage.getItem('datos')) || {};
+      datosCompra.zona = this.selectedZona;
+
+        localStorage.setItem('datos', JSON.stringify(datosCompra));
+
+      this.$router.push('/checkout');
+    },
+
+}
+
+
 };     
 
 </script>

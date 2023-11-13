@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-div">
-      <a href="#"><img src="../assets/images/Patagonia_Fest_Logo_Blanco.png" alt="logo" /></a>
+      <router-link to="/"><img src="../assets/images/Patagonia_Fest_Logo_Blanco.png" alt="logo" /></router-link>
       <nav class="nav-bar" id="nav">
                 <ul class="ul-nav">
                   <li>
@@ -13,7 +13,7 @@
                     <router-link class="link_section" to="/fechas">Tickets</router-link>
                   </li> 
                   <li>
-                    <router-link class="link_section" to="/login">Mi Cuenta</router-link>
+                    <router-link class="link_section" to="/login">Inicia Sesion</router-link>
                   </li>
                 </ul>
       </nav>

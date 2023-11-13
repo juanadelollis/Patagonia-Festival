@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from articles import articles
 from fechas import fechas
-from usuarios import usuarios
+from users import users
 
 app = Flask(__name__)
 CORS(app)
@@ -72,16 +72,16 @@ def deleteProduct(article_name):
             'article': articles
         })
 
-@app.route('/api/login', methods= ['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
-    data = request.get_json()
-
+    data = request.get_json();
+    
     username = data["name"]
     password = data["password"]
-
-    user = next((usuario for usuario in usuarios if usuario["name"] == username and usuario["password"] == password), None)
+    
+    user = next((user for user in users if user["name"] == username and user["password"] == password), None)
     if user:
-        return jsonify({"status": "succes", "user": "user"}), 200
+        return jsonify({"status": "success", "user": user}), 200
     else:
         return jsonify({"status": "error"}), 401
 
