@@ -11,6 +11,8 @@
       <button @click="reservar">Reserva tus tickets ahora</button>
     </div>
 
+    
+
     <div class="simple-component">
         <img src="../assets/images/banner-info.png" class="banner-info"/>
       <h2>¿Quiere saber mas del evento?</h2>
@@ -80,18 +82,16 @@ export default {
 </script>
 
 <style>
- .title{
-  margin-top: 0px;
-}
-
 .simple-component {
   text-align: center;
   padding: 5% 13%;
 }
 
 .simple-component h2 {
+  text-align: center;
   margin-bottom: 3%;
   color: #003366;
+
 }
 
 button {
@@ -109,6 +109,7 @@ button:hover {
 .event-banner {
   text-align: center;
   background-color: #8099b2;
+  padding: 4% 2%;
 }
 
 .banners {
@@ -130,6 +131,7 @@ button:hover {
   width:100%;
   height:100%;
 }
-
+.title{
+  padding-bottom: 2%;}
 
 </style>

@@ -39,7 +39,8 @@
 export default {
   data() {
     return {
-      fechas: [],
+      days: [],
+      selectedDays: []
     };
   },
   methods: {
@@ -79,7 +80,29 @@ export default {
       localStorage.setItem('datos', JSON.stringify(datosLocalStorage));
     
     },
+    saveDays(e){
+            e.preventDefault()
+           console.log(this.selectedDays)
+           const daysToSave = []
+           this.selectedDays.forEach( day =>
+           {
+            const obj = {
+                idDia: day,
+                nroDia: day
+            }
+            daysToSave.push(obj)
+           })
+           localStorage.setItem("purchase", JSON.stringify({dias: daysToSave}))
+           this.$router.push("/")
+        }
   },
+   mounted(){
+        fetch("http://localhost:5000/available-days")
+        .then(response =>response.json()).
+        then(data => 
+        this.days=data
+        )
+    }
   created() {
     this.getFechas();
   },

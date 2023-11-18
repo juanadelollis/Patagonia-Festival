@@ -5,6 +5,8 @@ import LoginPage from './components/LoginPage'
 import InfoPage from './components/InfoPage'
 import CheckOut from './components/CheckOut'
 import ZonasPage from './components/ZonasPage'
+import CreateAccountComponent from './components/CreateAccountComponent'
+import FinalComponent from './components/FinalComponent'
 
 //Acá definimos las rutas
 const routes = [
@@ -38,6 +40,16 @@ const routes = [
         path: '/checkout', //para la check page
         name: 'checkout',
         component: CheckOut
+    },
+    {
+        path: '/account', //para la final component
+        name: 'account',
+        component: CreateAccountComponent
+    },
+    {
+        path: '/final', //para la final component
+        name: 'final',
+        component: FinalComponent
     }
     
 ]

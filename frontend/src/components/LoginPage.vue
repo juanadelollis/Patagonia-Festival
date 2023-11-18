@@ -4,9 +4,10 @@
         <form class="login" @submit="checkUser">
             <input type="text" id="name" v-model="user.name" placeholder="Usuario">
             <input type="password" id="password" v-model="user.password" placeholder="Contraseña">
-            <button type="submit">Registrarse</button>
+            <button type="submit">Iniciar Sesion</button>
     
         </form>
+        <router-link class="link" to="/account"> Crear Cuenta </router-link>
     </div>
 </template>
 
@@ -90,6 +91,9 @@ margin: 2vh 1vw;
 .login button:hover {
 scale: 1.02;
 cursor: pointer;
+}
+.link{
+    color: black;
 }
 </style>
 
