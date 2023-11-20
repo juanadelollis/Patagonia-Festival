@@ -6,15 +6,12 @@ from entradas import entradas
 from zones import zones
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Permitir cualquier origen
 
-
-# Testing Route
-@app.route('/ping', methods=['GET'])
-def ping():
-    return jsonify({'response': 'pong!'})
 
 # Get Data Routes
+
+
 
 @app.route('/fechas')   # en el de ellos es available days
 def getFechas():
@@ -23,6 +20,11 @@ def getFechas():
 @app.route('/zones')
 def getZones():
     return jsonify(zones)
+
+@app.route('/entradas', methods=['GET'])
+def getEntradas():
+    return jsonify(entradas)
+
 
 @app.route('/buy', methods=['POST'])
 def buy():
@@ -33,29 +35,9 @@ def buy():
      return jsonify({'message': 'Compra Exitosa'})
 
 
-@app.route('/products/<string:product_name>')
-def getProduct(product_name):
-    productsFound = [
-        article for article in articles if article['name'] == product_name.lower()]
-    if (len(productsFound) > 0):
-        return jsonify({'product': productsFound[0]})
-    return jsonify({'message': 'Product Not found'})
-
-# Create Data Routes
-# @app.route('/articles', methods=['POST'])
-# def addArticle():
-#     new_article = {
-#         'id': request.json['id'],
-#         'title': request.json['title'],
-#         'body': request.json['body'],
-#         'fecha': request.json['fecha']
-#     }
-#     articles.append(new_article)
-#     return jsonify({"message":"Artículo agregado satisfactoriamente", 'artcles': articles})
-
 @app.route('/api/login', methods=['POST'])
 def login():
-    data = request.get_json();
+    data = request.get_json()
     
     username = data["name"]
     password = data["password"]
@@ -66,15 +48,26 @@ def login():
     else:
         return jsonify({"status": "error"}), 401
 
-# @app.route('/account', methods=['POST'])
-# def addUser():
-#     new_user = {
-#         'id': len(users) + 1,
-#         'name': request.json['name'],
-#         'password': request.json['password'],
-#     }
-#     users.append(new_user)
-#     return jsonify({"message":"Usuario agregado satisfactoriamente", 'usuarios': users})
+@app.route('/registro', methods=['POST'])
+def PostUser():
+    data = request.get_json()
+    
+    username = data["name"]
+    password = data["password"]
+    
+    user = next((user for user in users if user["name"] == username and user["password"] == password), None)
+    if user:
+        return jsonify({"status": "error"}), 401
+    else:
+        user["id"] = len(users) + 1
+        users.append(user)
+        return jsonify({"status": "success"}), 200
+
+@app.route('/usuarios')   # en el de ellos es available days
+def GetUsuarios():
+    return jsonify({'usuarios': users})
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
