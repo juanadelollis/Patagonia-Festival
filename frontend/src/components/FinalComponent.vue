@@ -1,4 +1,27 @@
 <template>
+<div>
+    <div>
+            <div class="card-zona">
+                <h1>Compra tus Tickets</h1>
+                <img src="../assets/images/Mapa_Plateas.svg" alt="Mapa plateas" class="Mapa_Plateas">
+
+                <div class="card-content-zona">                
+                    <div class="zona-description">
+                        <h3>Campo</h3>
+                        <h4>Precio $100.000</h4>
+                        <p class="description">Ofrece la mejor vista al escenario para vivir el concierto de cerca. Asegura tu entrada y sé parte de una experiencia musical inolvidable.</p>
+                    </div>
+                </div>
+                <div class="card-content-zona">                
+                    <div class="zona-description">
+                        <h3>Platea</h3>
+                        <h4>Precio $50.000</h4>
+                        <p class="description">Ofrece comodidad y una vista óptima del escenario, proporcionando una experiencia única para disfrutar del concierto con detalle y estilo. Con amplio espacio y ubicación estratégica, tu asiento en la Platea asegura una vivencia inigualable para sumergirte en la magia de la música.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
     <form class="final" @submit.prevent="buyTickets">
         <div class="form-group">
             <label for="name"> Nombre </label>
@@ -23,13 +46,14 @@
             </select>
         </div>
         <div class="form-group">
-            <div v-for="fecha in fechas" :key="fecha.idDia">
-                <input type="checkbox" :value="fecha.numeroDia" v-model="selectedDays">
-                <label> {{fecha.Recital}} Dia {{fecha.numeroDia}} </label>
+            <div v-for="fecha in fechas" :key="fecha.id_dia" class="days-checkbox">
+                <label> Dia {{fecha.idDia}}: {{fecha.headliner}} </label>
+                <input type="checkbox" :value="fecha.numeroDia" v-model="selectedfechas">
             </div>
         </div>
-        <button type="submit">Comprar</button>
+        <button type="submit">Pagar</button>
     </form>
+</div>
 </template>
 
 <script>
@@ -41,45 +65,35 @@ export default {
                 lastname: "",
                 email: ""
             },
-            days: [],
+            dia: [],
             zones: [],
             selectedZone: "",
-            selectedDays: [],
+            selectedfechas: [],
             numberOfTickers: 0,
             pricePerDay: []
 
         }
     },mounted () {
-        fetch("http://localhost:5000/available-days")
-        .then(response =>response.json()).
-            then(data => {
-            this.days = data
-            console.log(this.days)
-            }
-        ).catch(error => console.log(error));
+        this.getFechas(),
+        this.getZonas()
 
-        fetch("http://localhost:5000/zones")
-        .then(response =>response.json()).
-            then(data => {
-            this.zones = data           
-            console.log(this.zones)
-            }
-        ).catch(error => console.log(error));
+
         
     }, methods: {
         buyTickets(){
-            console.log("dias ", this.selectedDays)
+            console.log("dias ", this.selectedfechas)
             console.log("zonas ", this.selectedZone)
             console.log("tickets ", this.numberOfTickers)
             console.log("user ", this.user)
             this.calculatePrice()
 
             const purchase = {
-                days: this.selectedDays,
+                fechas: this.selectedfechas,
                 zones: this.selectedZone,
                 quantity: this.numberOfTickers,
                 user: this.user
             }
+ 
 
         fetch("http://localhost:5000/buy", {
             method: "POST",
@@ -92,8 +106,8 @@ export default {
 
         },
         calculatePrice(){
-            this.selectedDays.forEach(selectedDay =>{
-                this.days.forEach(day => {
+            this.selectedfechas.forEach(selectedDay =>{
+                this.fechas.forEach(day => {
                     if(day.numeroDia === selectedDay){
                         this.pricePerDay.push(day.precio)
                     }
@@ -102,9 +116,55 @@ export default {
             const zonePrice = this.zones.find(zona => zona.descripcion === this.selectedZone).adicional
             console.log("zonePrice", zonePrice)
             const finalPrice = this.pricePerDay.map(price => (price + zonePrice) * this.numberOfTickers)
-            console.log(finalPrice)
+            console.log("finalPrice", finalPrice)
 
-        }
+            const order = {
+                fechas: this.selectedfechas,
+                zones: this.selectedZone,
+                quantity: this.numberOfTickers,
+                user: this.user,
+                finalPrice: finalPrice
+            }
+            
+            localStorage.setItem("Order", JSON.stringify(order));
+            this.$router.push('/checkout');
+
+        },
+            getFechas() {
+      fetch("http://localhost:5000/fechas", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error("Error fetching fechas");
+          }
+          return resp.json();
+        })
+        .then((data) => {
+          this.fechas = data.fechas.map((fecha) => ({
+            ...fecha,
+            cantidadEntradas: 0,
+          }));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+        getZonas(){
+        fetch("http://localhost:5000/zones")
+        .then(response =>response.json()).
+            then(data => {
+            this.zones = data           
+            console.log(this.zones)
+            }
+        ).catch(error => console.log(error));
+        },
+    
+
+    
     }
 
 }
@@ -136,5 +196,9 @@ export default {
 .form-group select{
     width:150px;
     
+}
+.days-checkbox{
+    display:flex;
+
 }
 </style>

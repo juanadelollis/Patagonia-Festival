@@ -10,27 +10,14 @@
             <div class="card--content">
               <div>
                 <p>{{ fecha.profile_description }}</p>
-                <label for="">Cantidad de entradas</label>
-                <br />
-                <input type="number"
-                  required
-                  v-bind:name="fecha.headliner"
-                  v-model="fecha.cantidadEntradas"
-                  class="input-number"
-                  />
-                <span v-if="!esCantidadValida(fecha.cantidadEntradas)"
-                  >Ingrese una cantidad válida</span
-                >
+
               </div>
-              <img
-                v-bind:src="fecha.url_profile_picture"
-                v-bind:alt="fecha.headliner"
-              />
+              <img :src="fecha.url_profile_picture" :alt="fecha.headliner" />
             </div>
           </div>
         </div>
       </div>
-      <button @click="handleCounterChange" class="button">Siguiente Etapa</button>
+      <button @click="goToBuy" class="button">Comprar Ahora</button>
     </form>
   </section>
 </template>
@@ -39,15 +26,14 @@
 export default {
   data() {
     return {
-      days: [],
-      selectedDays: []
+      fechas: [],
+      selectedDays: [],
     };
   },
   methods: {
-    checkForm(e) {
+    goToBuy(e) {
       e.preventDefault();
-      this.handleCounterChange();
-      this.$router.push('/zonas');
+      this.$router.push('/final');
     },
     getFechas() {
       fetch("http://localhost:5000/fechas", {
@@ -56,58 +42,31 @@ export default {
           "Content-Type": "application/json",
         },
       })
-        .then((resp) => resp.json())
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error("Error fetching fechas");
+          }
+          return resp.json();
+        })
         .then((data) => {
           this.fechas = data.fechas.map((fecha) => ({
             ...fecha,
-            cantidadEntradas: 0, 
+            cantidadEntradas: 0,
           }));
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     },
-    esCantidadValida(cantidad) {
-      return cantidad >= 0;
-    },
-    handleCounterChange() {
-      const datosLocalStorage = { dias: {} };
-
-      this.fechas.forEach((fecha) => {
-        datosLocalStorage.dias[fecha.headliner] = fecha.cantidadEntradas;
-      });
-
-      localStorage.setItem('datos', JSON.stringify(datosLocalStorage));
     
-    },
-    saveDays(e){
-            e.preventDefault()
-           console.log(this.selectedDays)
-           const daysToSave = []
-           this.selectedDays.forEach( day =>
-           {
-            const obj = {
-                idDia: day,
-                nroDia: day
-            }
-            daysToSave.push(obj)
-           })
-           localStorage.setItem("purchase", JSON.stringify({dias: daysToSave}))
-           this.$router.push("/")
-        }
-  },
-   mounted(){
-        fetch("http://localhost:5000/available-days")
-        .then(response =>response.json()).
-        then(data => 
-        this.days=data
-        )
-    }
-  created() {
+  }
+,
+  mounted() {
     this.getFechas();
   },
 };
 </script>
+
 
 
 <style>

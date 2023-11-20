@@ -23,18 +23,34 @@ export default {
         }
     },
     methods: {
-    checkUser(e){
-        e.preventDefault();
+    checkUser(e) {
+    e.preventDefault();
 
-        fetch('http://localhost:5000/api/login',{
-                method: "POST",
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.user)
-            }
-            ).then( response => { console.log(response)})
+    if (!this.user.name || !this.user.password) {
+        alert("Por favor, ingrese nombre de usuario y contraseña.");
+        return;
+    }
+
+    fetch('http://localhost:5000/api/login', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.user)
+    })
+    .then(response => {
+        if (response.ok) {
+            localStorage.setItem('userValidated', this.user.name);
+            this.$router.push('/fechas');
+        } else {
+            alert("Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.");
+            console.error('Login failed');
         }
+    })
+    .catch(error => {
+        console.error('Error during login:', error);
+    });
+}
     }
 }
 

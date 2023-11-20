@@ -2,18 +2,17 @@
   <div class="checkout">
     <h1>Checkout</h1>
     <h2>Resumen de la compra:</h2>
-    <div v-for="fecha in fechas" :key="fecha.idDia">
-      <h3>Día {{ fecha.numeroDia }}: {{ fecha.headliner }}</h3>
-      <h4>Fecha del Boleto: {{ fecha.fecha }}</h4>
+    <div v-for="fecha in datosCompra.fechas" :key="fecha.idDia">
+      <h3> Día {{ fecha.fechas }}: x{{ datosCompra.quantity }}</h3>
+      <h4>Zona: {{ datosCompra.zones }}</h4>
       <p>
-        Cantidad de Entradas {{ datosCompra.dias[fecha.headliner] }} x
-        {{ valorEntrada }}
+        Cantidad de Entradas {{ datosCompra.user.name }} x {{ datosCompra.quantity }}
       </p>
       <p>
-        <b>{{ datosCompra.dias[fecha.headliner] * valorEntrada }}</b>
+        <b>{{ datosCompra.quantity * valorEntrada }}</b>
       </p>
     </div>
-    <h3>Total a pagar = {{ CantidadPagar }}</h3>
+    <h3>Total a pagar = {{ datosCompra.quantity * valorEntrada }}</h3>
     <form class="checkout-form">
       <h2>Inserte los datos de su Tarjeta:</h2>
       <label>Número de Tarjeta</label>
@@ -29,61 +28,24 @@
   </div>
 </template>
   
-  <script>
+<script>
 export default {
   data() {
     return {
-      datosCompra: JSON.parse(localStorage.getItem("datos")) || {},
-      fechas: [],
+      datosCompra: JSON.parse(localStorage.getItem("Order")),
+      valorEntrada: 8000, // Asegúrate de asignar el valor correcto aquí
     };
   },
-  computed: {
-    valorEntrada() {
-      const nombreZona = this.datosCompra.zona;
-      return nombreZona === "Campo"
-        ? 50000
-        : nombreZona === "Platea"
-        ? 100000
-        : 0;
-    },
-    CantidadPagar() {
-      let CatidadTotal = 0;
-      for (const key in this.datosCompra.dias) {
-        const cantidad = this.datosCompra.dias[key] || 0;
-        CatidadTotal += cantidad * this.valorEntrada;
-      }
-      return CatidadTotal;
-    },
-  },
-  mounted() {
-    this.getFechas();
-  },
   methods: {
-    getFechas() {
-      fetch("http://localhost:5000/fechas", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          this.fechas = data.fechas.map((fecha) => ({
-            ...fecha,
-            cantidadEntradas: 0,
-          }));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
     buy() {
-    this.$router.push('/');
-    alert("¡Gracias por tu compra!");
+      // Aquí puedes agregar lógica adicional antes de redirigir, si es necesario
+      this.$router.push('/');
+      alert("¡Gracias por tu compra!");
     },
   },
 };
 </script>
+
 
 <style>
 * {

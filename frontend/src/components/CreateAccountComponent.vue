@@ -1,33 +1,53 @@
 <template>
     <div class="account-div">
       <h1>Crear Cuenta</h1>
-        <form class="account" @submit.prevent="submitForm">
-            <input type="text" id="name" v-model="user.name" placeholder="Usuario">
-            <input type="password" id="password" v-model="user.password" placeholder="Contraseña">
-            <input type="password" id="repeatPassword" v-model="user.repeatPassword" placeholder="Repetir Contraseña">
+        <form class="account" @submit.prevent="registerUser">
+            <input type="text" id="name" v-model="this.user.name" placeholder="Usuario">
+            <input type="password" id="password" v-model="this.user.password" placeholder="Contraseña">
             <button type="submit">Crear Cuenta</button>
         </form>
     </div>
 
 </template>
-
 <script>
-export default { 
-  data(){
-    return{
+export default {
+  data() {
+    return {
       user: {
         name: "",
         password: "",
-        repeatPassword: "",
       },
     };
   },
   methods: {
-    validarContraseñas() {
-      if (this.user.password === this.user.repeatPassword){
-        return ("Usuario Creado")}  
-},
-},
+    registerUser() {
+      fetch("http://localhost:5000/registro", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.user),
+      })
+        .then((resp) => {
+          if (!resp.ok) {
+            throw new Error("Error registering user");
+          }
+          return resp.json();
+        })
+        .then((resp) => {
+          if (resp.ok) {
+          alert("Usuario registrado exitosamente");
+          this.$router.push('/login');
+
+          }
+        })
+        .catch((error) => {
+          console.error("Error adding user:", error);
+          alert("Error al registrar usuario. Usuario ya registrado, prueba otros datos");
+        });
+    },
+  },
+
 };
 </script>
 
