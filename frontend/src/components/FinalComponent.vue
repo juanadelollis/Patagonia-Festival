@@ -48,7 +48,7 @@
         <div class="form-group">
             <div v-for="fecha in fechas" :key="fecha.id_dia" class="days-checkbox">
                 <label> Dia {{fecha.idDia}}: {{fecha.headliner}} </label>
-                <input type="checkbox" :value="fecha.numeroDia" v-model="selectedfechas">
+                <input type="checkbox" :value="fecha.fecha" v-model="selectedfechas">
             </div>
         </div>
         <button type="submit">Pagar</button>

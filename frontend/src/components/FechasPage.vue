@@ -1,7 +1,7 @@
 <template>
   <section>
     <form @submit.prevent="checkForm">
-      <h1>Elige el día que quieres ir</h1>
+      <h1>Conoce nuestro Line Up</h1>
       <div class="card-section">
         <div class="card--artista">
           <div v-for="fecha in fechas" :key="fecha.id_dia">
@@ -72,13 +72,14 @@ export default {
 <style>
                 
 .card--artista {
-  width: 40%;
+  width: 60%;
 }
 
 .card--content {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  
 }
 
 .card--content p {
@@ -97,7 +98,7 @@ h3 {
   display: flex;
   justify-content: flex-start;
   font-weight: bold;
-  width: 85%;
+  width: 100%;
 }
 
 h2 {
@@ -108,7 +109,9 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 40px;
+  font-size: 60px;
+  color: #003366;
 }
 
 .button {

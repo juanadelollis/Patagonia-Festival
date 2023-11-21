@@ -14,42 +14,42 @@ export default {
   data() {
     return {
       user: {
-        name: "",
-        password: "",
+        name: '',
+        password: '',
       },
     };
   },
   methods: {
     registerUser() {
-      fetch("http://localhost:5000/registro", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.user),
-      })
-        .then((resp) => {
-          if (!resp.ok) {
-            throw new Error("Error registering user");
-          }
-          return resp.json();
-        })
-        .then((resp) => {
-          if (resp.ok) {
-          alert("Usuario registrado exitosamente");
-          this.$router.push('/login');
+      const endpoint = "http://localhost:5000/registro"; // Replace with your actual endpoint URL
 
+      fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: this.user.name,
+          password: this.user.password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert('Usuario creado con éxito');
+          } else {
+            alert('Error al crear el usuario: ' + data.error);
           }
         })
         .catch((error) => {
-          console.error("Error adding user:", error);
-          alert("Error al registrar usuario. Usuario ya registrado, prueba otros datos");
+          console.error('Error al enviar la solicitud: ', error);
+          alert('Se ha producido un error al intentar crear el usuario.');
         });
     },
   },
-
 };
 </script>
+
 
 <style>
 *{

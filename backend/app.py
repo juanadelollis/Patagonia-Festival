@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from fechas import fechas
 from users import users
 from entradas import entradas
@@ -47,9 +47,9 @@ def login():
         return jsonify({"status": "success", "user": user}), 200
     else:
         return jsonify({"status": "error"}), 401
-
+"""
 @app.route('/registro', methods=['POST'])
-def PostUser():
+def postUser():
     data = request.get_json()
     
     username = data["name"]
@@ -62,6 +62,38 @@ def PostUser():
         user["id"] = len(users) + 1
         users.append(user)
         return jsonify({"status": "success"}), 200
+"""
+@app.route('/registro', methods=['POST'])
+def registro():
+  """
+  Endpoint para registrar un nuevo usuario.
+
+  Parámetros:
+    name: El nombre del usuario.
+    password: La contraseña del usuario.
+
+  Devuelve:
+    Un objeto JSON con los siguientes campos:
+      success: True si el registro fue exitoso, False de lo contrario.
+      error: Un mensaje de error si el registro no fue exitoso.
+  """
+
+  data = request.get_json()
+  name = data['name']
+  password = data['password']
+
+  # Validar que el usuario no exista
+
+  if name in users:
+    return jsonify({'success': False, 'error': 'El usuario ya existe'})
+
+  # Crear el usuario
+
+  users[name] = password
+
+  return jsonify({'success': True})
+
+
 
 @app.route('/usuarios')   # en el de ellos es available days
 def GetUsuarios():

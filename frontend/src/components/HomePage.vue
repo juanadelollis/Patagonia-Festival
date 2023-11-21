@@ -14,7 +14,7 @@
     
 
     <div class="simple-component">
-        <img src="../assets/images/banner-info.png" class="banner-info"/>
+      <img src="../assets/images/above.png" class="banner-info"/>
       <h2>¿Quiere saber mas del evento?</h2>
       <p>
         Es la primera edicion del mejor festival de primavera para estudiantes
@@ -84,7 +84,7 @@ export default {
 <style>
 .simple-component {
   text-align: center;
-  padding: 5% 13%;
+  padding: 5% 10%;
 }
 
 .simple-component h2 {

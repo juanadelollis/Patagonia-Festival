@@ -1,17 +1,13 @@
 <template>
   <div class="checkout">
-    <h1>Checkout</h1>
-    <h2>Resumen de la compra:</h2>
+    <h1>Resumen de la compra:</h1>
+    <h2>
+      {{ datosCompra.user.name }} {{ datosCompra.user.lastname }}
+    </h2>
     <div v-for="fecha in datosCompra.fechas" :key="fecha.idDia">
-      <h3> Día {{ fecha.fechas }}: x{{ datosCompra.quantity }}</h3>
-      <h4>Zona: {{ datosCompra.zones }}</h4>
-      <p>
-        Cantidad de Entradas {{ datosCompra.user.name }} x {{ datosCompra.quantity }}
-      </p>
-      <p>
-        <b>{{ datosCompra.quantity * valorEntrada }}</b>
-      </p>
+      <h3> Día {{ fecha }}: Tickets {{ datosCompra.quantity }}</h3>
     </div>
+    <h3>Zona: {{ datosCompra.zones }}</h3>
     <h3>Total a pagar = {{ datosCompra.quantity * valorEntrada }}</h3>
     <form class="checkout-form">
       <h2>Inserte los datos de su Tarjeta:</h2>
@@ -42,6 +38,7 @@ export default {
       this.$router.push('/');
       alert("¡Gracias por tu compra!");
     },
+  
   },
 };
 </script>
