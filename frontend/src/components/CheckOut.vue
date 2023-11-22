@@ -8,7 +8,7 @@
       <h3> Día {{ fecha }}: Tickets {{ datosCompra.quantity }}</h3>
     </div>
     <h3>Zona: {{ datosCompra.zones }}</h3>
-    <h3>Total a pagar = {{ datosCompra.quantity * valorEntrada }}</h3>
+    <h3>Total a pagar = {{ (datosCompra.quantity * datosCompra.fechas.length) * (valorEntrada + datosCompra.valorAdicional) }}</h3>
     <form class="checkout-form">
       <h2>Inserte los datos de su Tarjeta:</h2>
       <label>Número de Tarjeta</label>
@@ -29,13 +29,13 @@ export default {
   data() {
     return {
       datosCompra: JSON.parse(localStorage.getItem("Order")),
-      valorEntrada: 8000, // Asegúrate de asignar el valor correcto aquí
+      valorEntrada: 5000, // Asegúrate de asignar el valor correcto aquí */
     };
   },
   methods: {
     buy() {
       // Aquí puedes agregar lógica adicional antes de redirigir, si es necesario
-      this.$router.push('/');
+      this.$router.push('/success');
       alert("¡Gracias por tu compra!");
     },
   

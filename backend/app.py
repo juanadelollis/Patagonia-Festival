@@ -47,51 +47,23 @@ def login():
         return jsonify({"status": "success", "user": user}), 200
     else:
         return jsonify({"status": "error"}), 401
-"""
-@app.route('/registro', methods=['POST'])
-def postUser():
-    data = request.get_json()
-    
-    username = data["name"]
-    password = data["password"]
-    
-    user = next((user for user in users if user["name"] == username and user["password"] == password), None)
-    if user:
-        return jsonify({"status": "error"}), 401
-    else:
-        user["id"] = len(users) + 1
-        users.append(user)
-        return jsonify({"status": "success"}), 200
-"""
+
 @app.route('/registro', methods=['POST'])
 def registro():
-  """
-  Endpoint para registrar un nuevo usuario.
-
-  Parámetros:
-    name: El nombre del usuario.
-    password: La contraseña del usuario.
-
-  Devuelve:
-    Un objeto JSON con los siguientes campos:
-      success: True si el registro fue exitoso, False de lo contrario.
-      error: Un mensaje de error si el registro no fue exitoso.
-  """
-
   data = request.get_json()
   name = data['name']
   password = data['password']
 
-  # Validar que el usuario no exista
-
-  if name in users:
+  if name in [user['name'] for user in users]:
     return jsonify({'success': False, 'error': 'El usuario ya existe'})
-
   # Crear el usuario
 
-  users[name] = password
+  new_user = {'id': len(users) + 1, 'name': name, 'password': password}
+  users.append(new_user)
+
 
   return jsonify({'success': True})
+
 
 
 

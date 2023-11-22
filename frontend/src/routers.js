@@ -7,6 +7,7 @@ import CheckOut from './components/CheckOut'
 import ZonasPage from './components/ZonasPage'
 import CreateAccountComponent from './components/CreateAccountComponent'
 import FinalComponent from './components/FinalComponent'
+import SucessComponent from './components/SucessComponent'
 
 //Acá definimos las rutas
 const routes = [
@@ -50,6 +51,11 @@ const routes = [
         path: '/final', //para la final component
         name: 'final',
         component: FinalComponent
+    },
+    {
+        path: '/success', //para la final component
+        name: 'success',
+        component: SucessComponent
     }
     
 ]

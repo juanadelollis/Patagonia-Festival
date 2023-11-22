@@ -37,13 +37,13 @@ export default {
         .then((data) => {
           if (data.success) {
             alert('Usuario creado con éxito');
+            this.$router.push('/login');
           } else {
             alert('Error al crear el usuario: ' + data.error);
           }
         })
         .catch((error) => {
-          console.error('Error al enviar la solicitud: ', error);
-          alert('Se ha producido un error al intentar crear el usuario.');
+          alert('Se ha producido un error al intentar crear el usuario.', error);
         });
     },
   },
