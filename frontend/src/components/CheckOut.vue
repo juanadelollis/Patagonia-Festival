@@ -12,13 +12,13 @@
     <form class="checkout-form">
       <h2>Inserte los datos de su Tarjeta:</h2>
       <label>Número de Tarjeta</label>
-      <input type="number" placeholder="1234 5678 9101 1121" />
+      <input type="number" placeholder="1234 5678 9101 1121" v-model="card_number" />
       <label>Mes de Vencimiento</label>
-      <input type="number" placeholder="11"/>
+      <input type="number" placeholder="11"  v-model="card_mes_vencimiento"/>
       <label>Año de Vencimiento</label>
-      <input type="number" placeholder="2027"/>
+      <input type="number" placeholder="2027"  v-model="card_anio_vencimiento"/>
       <label>Código de Seguridad</label>
-      <input type="number" placeholder="123" />
+      <input type="number" placeholder="123"  v-model="card_ccv"/>
       <button type="submit" @click="buy">Comprar</button>
     </form>
   </div>
@@ -29,14 +29,20 @@ export default {
   data() {
     return {
       datosCompra: JSON.parse(localStorage.getItem("Order")),
-      valorEntrada: 5000, // Asegúrate de asignar el valor correcto aquí */
+      valorEntrada: 5000, 
+      card_number: "",
+      card_mes_vencimiento: "",
+      card_anio_vencimiento: "",
+      card_ccv: "",
     };
   },
   methods: {
     buy() {
-      // Aquí puedes agregar lógica adicional antes de redirigir, si es necesario
-      this.$router.push('/success');
+      console.log( "número de tarjeta" , this.card_number)
+      console.log( "Fecha de Vencimiento" , this.card_mes_vencimiento + "/" + this.card_anio_vencimiento)
+      console.log( "Código de seguridad" , this.card_ccv)
       alert("¡Gracias por tu compra!");
+      this.$router.push('/success');
     },
   
   },

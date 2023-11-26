@@ -61,7 +61,6 @@ def registro():
   new_user = {'id': len(users) + 1, 'name': name, 'password': password}
   users.append(new_user)
 
-
   return jsonify({'success': True})
 
 

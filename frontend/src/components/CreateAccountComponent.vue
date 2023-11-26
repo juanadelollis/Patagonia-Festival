@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     registerUser() {
-      const endpoint = "http://localhost:5000/registro"; // Replace with your actual endpoint URL
+      const endpoint = "http://localhost:5000/registro";
 
       fetch(endpoint, {
         method: 'POST',

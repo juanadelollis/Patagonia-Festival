@@ -77,8 +77,6 @@ export default {
     this.getZonas();
   },
   methods: {
-
-
     
     buyTickets() {
   console.log("dias ", this.selectedfechas);

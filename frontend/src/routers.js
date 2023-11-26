@@ -54,7 +54,7 @@ const routes = [
     },
     {
         path: '/success', //para la final component
-        name: 'success',
+        name: 'sucScess',
         component: SucessComponent
     }
     
